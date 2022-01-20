@@ -19,11 +19,11 @@ namespace CoreApp.Controllers
         }
 
         [HttpPost]
-        public PartialViewResult SubscribeMail(NewsLetter p)
+        public JsonResult SubscribeMail(NewsLetter p)
         {
             p.MailStatus = true;
             nlm.AddNewsLetter(p);
-            return PartialView();
+            return Json(p);
         }
     }
 }
