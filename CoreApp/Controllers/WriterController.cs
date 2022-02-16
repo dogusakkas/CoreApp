@@ -84,6 +84,8 @@ namespace CoreApp.Controllers
         [HttpPost]
         public IActionResult WriterAdd(AddProfileImage p)
         {
+            // 73. DERS 
+
             Writer w = new Writer();
             if (p.WriterImage != null)
             {

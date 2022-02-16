@@ -1,0 +1,60 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification> 
+
+
+@{
+    ViewData["Title"] = "AllNotification";
+    Layout = "~/Views/Writer/WriterLayout.cshtml";
+}
+
+<h1>Tüm Bildirimleriniz</h1>
+<br />
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Son Yayınlanan 10 Bloğunuz</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Bildirim Türü </th>
+                                <th> İçerik </th>
+                                <th> Tarih </th>
+                                <th> Durumu </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.NotificationID</td>
+                                <td> @item.NotificationType </td>
+                                <td> @item.NotificationDetails </td>
+                                <td> @(((DateTime)item.NotificationDate).ToString("dd MMMM yyyy")) </td>
+                                <td>
+                                    @if (item.NotificationStatus)
+                                    {
+                                        <label class="badge badge-gradient-success">Okunmadı</label>
+                                    }
+                                    else
+                                    {
+                                        <label class="badge badge-gradient-danger">Okundu</label>
+                                    }
+                                </td>
+                            </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
