@@ -35,7 +35,7 @@ namespace CoreApp.Controllers
                 var useridentity = new ClaimsIdentity(claims, "a");
                 ClaimsPrincipal principal = new ClaimsPrincipal(useridentity);
                 await HttpContext.SignInAsync(principal);
-                return RedirectToAction("Index","Writer");
+                return RedirectToAction("Index","Dashboard");
             }
             else
             {
@@ -44,15 +44,3 @@ namespace CoreApp.Controllers
         }
     }
 }
-
-//Context c = new Context();
-//var datavalue = c.Writers.FirstOrDefault(x => x.WriterMail == p.WriterMail && x.WriterPassword == p.WriterPassword);
-//if (datavalue != null)
-//{
-//    HttpContext.Session.SetString("username", p.WriterMail);
-//    return RedirectToAction("Index", "Writer");
-//}
-//else
-//{
-//    return View();
-//}
