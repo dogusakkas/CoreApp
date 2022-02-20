@@ -14,5 +14,10 @@ namespace CoreApp.Controllers
         {
             return View();
         }
+        [AllowAnonymous]
+        public PartialViewResult AdminNavbarPartial()
+        {
+            return PartialView();
+        }
     }
 }
