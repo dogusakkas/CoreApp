@@ -1,8 +1,57 @@
-﻿
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Kategori Listesi</h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr style="text-align:center">
+                            <th>#</th>
+                            <th>Kategori Adı</th>
+                            <th>Pasif</th>
+                            <th>Aktif</th>
+                            <th>Düzenle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr style="text-align:center">
+                                <td>@item.CategoryID</td>
+                                <td>@item.CategoryName</td>
+                                <td><a href="#" class="btn btn-danger">Pasif Yap</a></td>
+                                <td><a href="#" class="btn btn-primary">Aktif Yap</a></td>
+                                <td><a href="#" class="btn btn-success">Düzenle</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
+                <a href="/Admin/Category/AddCategory/" class="btn btn-primary">Yeni Kategori Ekle</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }),  X.PagedList.Web.Common.PagedListRenderOptions.OnlyShowFivePagesAtATime)
+
 
