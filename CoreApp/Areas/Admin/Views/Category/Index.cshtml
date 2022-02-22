@@ -36,8 +36,8 @@
                             <tr style="text-align:center">
                                 <td>@item.CategoryID</td>
                                 <td>@item.CategoryName</td>
-                                <td><a href="#" class="btn btn-danger">Pasif Yap</a></td>
-                                <td><a href="#" class="btn btn-primary">Aktif Yap</a></td>
+                                <td><a href="~/Admin/Category/CategoryActivePassive/@item.CategoryID/" id="ActiveBtn" onclick="return confirm('Kategoriyi aktif yapmak istediğinize emin misiniz?');" class="btn btn-primary">Aktif Yap</a></td>
+                                <td><a href="~/Admin/Category/CategoryActivePassive/@item.CategoryID/" id="PassiveBtn" onclick="return confirm('Kategoriyi pasif yapmak istediğinize emin misiniz?');" class="btn btn-danger">Pasif Yap</a></td>
                                 <td><a href="#" class="btn btn-success">Düzenle</a></td>
                             </tr>
                         }

@@ -47,5 +47,21 @@ namespace CoreApp.Areas.Admin.Controllers
 
             return View();
         }
+        public IActionResult CategoryActivePassive(int id, Category p)
+        {
+
+            var value = cm.TGetById(id);
+
+            if (p.CategoryStatus == true)
+            {
+                p.CategoryStatus = false;
+            }
+            else
+            {
+                p.CategoryStatus = true;
+            }
+            
+            return RedirectToAction("Index");
+        }
     }
 }
