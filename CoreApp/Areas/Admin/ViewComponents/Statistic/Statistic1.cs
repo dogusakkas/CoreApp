@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace CoreApp.Areas.Admin.ViewComponents.Statistic
 {
@@ -16,8 +17,13 @@ namespace CoreApp.Areas.Admin.ViewComponents.Statistic
         public IViewComponentResult Invoke()
         {
             ViewBag.v1 = bm.GetList().Count();
-            ViewBag.v2 = bm.get
+            ViewBag.v2 = c.Contacts.Count();
             ViewBag.v3 = c.Comments.Count();
+
+            string api = "f7893fd4e9a1080bfa5a39897350cac9";
+            string connection = "https://api.openweathermap.org/data/2.5/weather?q=istanbul&mode=xml&lang=tr&units=metric&appid=" + api;
+            XDocument document = XDocument.Load(connection);
+            ViewBag.v4 = document.Descendants("temperature").ElementAt(0).Attribute("value").Value;
             return View();
         }
     }
