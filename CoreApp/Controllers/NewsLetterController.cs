@@ -2,6 +2,7 @@
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,17 +13,12 @@ namespace CoreApp.Controllers
     public class NewsLetterController : Controller
     {
         NewsLetterManager nlm = new NewsLetterManager(new EfNewsLetterRepository());
-        [HttpGet]
-        public PartialViewResult SubscribeMail()
-        {
-            return PartialView();
-        }
 
         [HttpPost]
         public JsonResult SubscribeMail(NewsLetter p)
         {
             p.MailStatus = true;
-            nlm.AddNewsLetter(p);
+            nlm.TAdd(p);
             return Json(p);
         }
     }
