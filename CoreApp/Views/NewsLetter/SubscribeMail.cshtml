@@ -10,18 +10,21 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 
 <script type="text/javascript">
+
     $(function () {
         $("#btnsend").click(function () {
-            Mail: $("#txtaddmail").val();
+            var veri = { Mail: $("#txtaddmail").val() };
 
             $.ajax({
+                type: 'post',
                 url: '/NewsLetter/SubscribeMail/',
-                type: 'POST',
                 dataType: 'json',
+                data: veri,
                 success: function (data) {
                     alert("Mail üyeliğiniz alınmıştır")
                 }
             });
         });
     });
+
 </script>

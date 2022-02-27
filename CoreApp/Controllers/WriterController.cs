@@ -34,11 +34,6 @@ namespace CoreApp.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Test()
-        {
-            return View();
-        }
-        [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
         {
             return PartialView();

@@ -7,6 +7,12 @@
     Layout = "~/Views/Writer/WriterLayout.cshtml";
 }
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="~/writer/assets/js/global.js"></script>
+<script src="~/writer/assets/js/jquery.timeago.js"></script>
+
+
+
 <h1>Gelen Kutusu</h1>
 <table class="table table-bordered">
     <tr>
@@ -16,7 +22,7 @@
         <th>Tarih</th>
         <th>Mesajı Aç</th>
     </tr>
-    @foreach (var item in Model.OrderByDescending(x=>x.MessageID))
+    @foreach (var item in Model.OrderByDescending(x => x.MessageID))
     {
         <tr>
             <td>@item.MessageID</td>
@@ -24,7 +30,13 @@
             <td>@item.SenderUser.WriterName</td>
             <td>@(((DateTime)item.MessageDate).ToString("dd MMMM yyyy"))</td>
             <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-dark">Mesajı Aç</a></td>
+            
         </tr>
     }
 </table>
+
+<p> Posted <time class="timeago" datetime="27 February 2022 14:00"></time></p>
+
+
+
 
