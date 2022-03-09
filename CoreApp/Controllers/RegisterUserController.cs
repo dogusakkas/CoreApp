@@ -25,6 +25,7 @@ namespace CoreApp.Controllers
         {
             return View();
         }
+
         [HttpPost]
         public async Task<IActionResult> Index(UserSignUpViewModel p)
         {
@@ -51,7 +52,7 @@ namespace CoreApp.Controllers
                     }
                 }
             }
-            return View();
+            return View(p);
         }
     }
 }
