@@ -18,6 +18,7 @@ namespace CoreApp.Models
 
         [Display(Name = "Şifre Tekrar")]
         [Compare("Password", ErrorMessage ="Şifreler Uyuşmuyor")]
+        [Required(ErrorMessage ="Lütfen şifrenizi tekrar giriniz")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Mail Adresi")]
@@ -27,6 +28,8 @@ namespace CoreApp.Models
         [Display(Name = "Kullanıcı Adı")]
         [Required(ErrorMessage = "Lütfen kullanıcı adınızı giriniz")]
         public string UserName { get; set; }
+
+        public  bool IsAcceptTheContract { get; set; }
 
     }
 }
