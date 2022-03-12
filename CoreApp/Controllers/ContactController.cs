@@ -18,12 +18,12 @@ namespace CoreApp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Index(Contact p)
+        public PartialViewResult ContactAdd(Contact p)
         {
             p.ContactDate = DateTime.Parse(DateTime.Now.ToShortDateString());
             p.ContactStatus = true;
-            cm.ContactAdd(p);
-            return RedirectToAction("Index","Blog");
+            cm.TAdd(p);
+            return PartialView();
         }
     }
 }

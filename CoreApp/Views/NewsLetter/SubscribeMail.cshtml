@@ -11,20 +11,17 @@
 
 <script type="text/javascript">
 
-    $(function () {
         $("#btnsend").click(function () {
-            var veri = { Mail: $("#txtaddmail").val() };
+            let veri = { Mail: $("#txtaddmail").val() };
 
             $.ajax({
                 type: 'post',
                 url: '/NewsLetter/SubscribeMail/',
-                dataType: 'json',
                 data: veri,
                 success: function (data) {
                     alert("Mail üyeliğiniz alınmıştır")
                 }
             });
         });
-    });
 
 </script>

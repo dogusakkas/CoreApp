@@ -18,7 +18,7 @@ namespace CoreApp.Controllers
         public IActionResult Index()
         {
             var name = User.Identity.Name;
-            var namesurname = c.Users.Where(x => x.NameSurname == name).Select(y => y.NameSurname).FirstOrDefault();
+            var namesurname = c.Users.Where(x => x.UserName == name).Select(y => y.NameSurname).FirstOrDefault();
             ViewBag.v = name;
             var writerID = c.Writers.Where(x => x.WriterMail == name).Select(y => y.WriterID).FirstOrDefault();
             var values = wm.GetWriterByID(writerID);

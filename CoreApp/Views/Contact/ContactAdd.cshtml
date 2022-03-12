@@ -1,0 +1,52 @@
+﻿
+
+<form>
+    <div class="row contact_left_grid">
+        <div class="col-md-6 con-left">
+            <div class="form-group">
+                <label for="validationCustom01 my-2">Adınız</label>
+                <input id="txtname" class="form-control" type="text" name="ContactUserName" placeholder="" required="">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">E Posta Adresiniz</label>
+                <input id="txtemail" class="form-control" type="email" name="ContactMail" placeholder="" required="">
+            </div>
+            <div class="form-group">
+                <label for="validationCustom03 my-2">Konu</label>
+                <input id="txtsubject" class="form-control" type="text" name="ContactSubject" placeholder="" required="">
+            </div>
+        </div>
+        <div class="col-md-6 con-right">
+            <div class="form-group">
+                <label for="textarea">Mesajınız</label>
+                <textarea id="textarea" name="ContactMessage" placeholder=""></textarea>
+            </div>
+            <input id="btngonder" class="form-control" type="submit" value="Gönder">
+
+        </div>
+    </div>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script type="text/javascript">
+
+    $("#btngonder").click(function () {
+        let veri = {
+            ContactUserName: $("#txtname").val(),
+            ContactMail: $("#txtemail").val(),
+            ContactSubject: $("#txtsubject").val(),
+            ContactMessage: $("#textarea").val()
+        };
+
+        $.ajax({
+            type: 'post',
+            url: '/Contact/ContactAdd/',
+            data: veri,
+            success: function (func) {
+                let result = jQuery.parseJSON(func);
+            }
+        })
+    }
+
+</script>
