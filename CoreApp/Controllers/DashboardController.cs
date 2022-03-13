@@ -17,16 +17,14 @@ namespace CoreApp.Controllers
         Context c = new Context();
         public IActionResult Index()
         {
-            var name = User.Identity.Name;
-            var namesurname = c.Users.Where(x => x.UserName == name).Select(y => y.NameSurname).FirstOrDefault();
-            ViewBag.v = name;
-            var writerID = c.Writers.Where(x => x.WriterMail == name).Select(y => y.WriterID).FirstOrDefault();
-            var values = wm.GetWriterByID(writerID);
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerid = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
 
             ViewBag.tbc = c.Blogs.Count().ToString();
-            ViewBag.wbc = c.Blogs.Where(x => x.WriterID == 1).Count().ToString();
-            ViewBag.cc = c.Categories.Count().ToString();
-            return View(values);
+            ViewBag.wbc = c.Blogs.Where(x => x.WriterID == writerid).Count();
+            ViewBag.cc = c.Categories.Count();
+            return View();
         }
     }
 }
