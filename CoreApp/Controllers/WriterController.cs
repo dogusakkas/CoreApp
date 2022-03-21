@@ -19,6 +19,7 @@ namespace CoreApp.Controllers
     public class WriterController : Controller
     {
         WriterManager wm = new WriterManager(new EfWriterRepository());
+        Context c = new Context();
 
         private readonly UserManager<AppUser> _userManager;
 
@@ -30,10 +31,11 @@ namespace CoreApp.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var userMail = User.Identity.Name;
-            ViewBag.v = userMail;
-            Context c = new Context();
-            var writerName = c.Writers.Where(x => x.WriterMail == userMail).Select(y => y.WriterName).FirstOrDefault();
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            ViewBag.v = usermail;
+            
+            var writerName = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
             ViewBag.v2 = writerName;
             return View();
         }
@@ -42,17 +44,20 @@ namespace CoreApp.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
         {
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
+            var writerName = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterName).FirstOrDefault();
+            ViewBag.ns = writerName;
             return PartialView();
         }
-        [AllowAnonymous]
+
         public PartialViewResult WriterFooterPartial()
         {
             return PartialView();
         }
-        [AllowAnonymous]
+
         public PartialViewResult WriterUpNavbarPartial()
         {
             return PartialView();
