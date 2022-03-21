@@ -58,36 +58,29 @@ namespace CoreApp.Controllers
             return PartialView();
         }
         [HttpGet]
-        public IActionResult WriterEditProfile()
+        public async Task<IActionResult> WriterEditProfile()
         {
-            Context c = new Context();
-            UserManager um = new UserManager(new EfUserRepository());
-
-            var username = User.Identity.Name;
-            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
-            var id = c.Users.Where(x => x.Email == usermail).Select(y => y.Id).FirstOrDefault();
-            var values = um.TGetById(id);
-            return View(values);
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserUpdateViewModel model = new UserUpdateViewModel();
+            model.mail = values.Email;
+            model.namesurname = values.NameSurname;
+            model.username = values.UserName;
+            model.imageurl = values.ImageUrl;
+            return View(model);
         }
 
         [HttpPost]
-        public IActionResult WriterEditProfile(Writer p)
+        public async Task <IActionResult> WriterEditProfile(UserUpdateViewModel model)
         {
-            WriterValidator wv = new WriterValidator();
-            ValidationResult results = wv.Validate(p);
-            if (results.IsValid)
-            {
-                wm.TUpdate(p);
-                return RedirectToAction("Index", "Dashboard");
-            }
-            else
-            {
-                foreach (var item in results.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            values.NameSurname = model.namesurname;
+            values.ImageUrl = model.imageurl;
+            values.UserName = model.username;
+            values.Email = model.mail;
+            values.PasswordHash = _userManager.PasswordHasher.HashPassword(values,model.password);
+            var result = await _userManager.UpdateAsync(values);
+            return RedirectToAction("Index", "Dashboard");
+
         }
         [AllowAnonymous]
         [HttpGet]
@@ -119,6 +112,11 @@ namespace CoreApp.Controllers
             wm.TAdd(w);
             return RedirectToAction("Index", "Dashboard");
         }
+
+        //public async Task <IActionResult> LogOut()
+        //{
+            
+        //}
 
     }
 }
