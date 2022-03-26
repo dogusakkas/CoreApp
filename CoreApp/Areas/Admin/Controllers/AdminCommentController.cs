@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 namespace CoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class AdminBlogController : Controller
+    public class AdminCommentController : Controller
     {
-        BlogManager bm = new BlogManager(new EfBlogRepository());
+        CommentManager cm = new CommentManager(new EfCommentRepository());
         public IActionResult Index()
         {
-            var values = bm.GetBlogListWithCategory();
+            var values = cm.GetCommentWithBlog();
             return View(values);
         }
     }
