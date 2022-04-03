@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
@@ -29,13 +30,13 @@ namespace CoreApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<Context>();
-            services.AddIdentity<AppUser, AppRole>(x=>
+            services.AddIdentity<AppUser, AppRole>(x =>
             {
                 x.Password.RequireUppercase = false;
                 x.Password.RequireNonAlphanumeric = false;
                 x.Password.RequireLowercase = false;
             })
-                
+
                 .AddEntityFrameworkStores<Context>();
 
 
@@ -54,6 +55,12 @@ namespace CoreApp
                 .AddCookie(x =>
             {
                 x.LoginPath = "/Login/Index";
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/Login/AccessDenied");
+                options.LoginPath = "/Login/Index/";
             });
         }
 

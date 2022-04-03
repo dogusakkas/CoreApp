@@ -52,5 +52,10 @@ namespace CoreApp.Controllers
             return RedirectToAction("Index","Blog");
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
     }
 }
